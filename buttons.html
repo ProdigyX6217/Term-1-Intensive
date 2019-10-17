@@ -1,75 +1,104 @@
 <!DOCTYPE html>
 <html>
 <body>
-
 <h1>R-I-T-H-M</h1>
 
 <h2>Simple Virtual Calculator</h2>
 
 <p>The Onclick Event (Button Press) triggers a function when an element is clicked on.</p>
 
-<p>Click the Numeric Values (Buttons) to trigger a function that will output the corresponding number in a p element with id="demo".</p>
+<p>Click the Numeric Values (Buttons) to trigger a function that will output the corresponding symbol in a p element with id="demo".</p>
 
-<div class='calc-buttons' style="display: grid; grid-gap: 4px; grid-template-columns: 1fr 1fr 1fr">
+<div class='calc-buttons' style="display: grid; grid-gap: 4px; grid-template-columns: 1fr 1fr 1fr 1fr">
   <button onclick="CalcButton(7)">7</button>
   <button onclick="CalcButton(8)">8</button>
   <button onclick="CalcButton(9)">9</button>
+  <button onclick="selectOperation('+')">+</button>
 
   <button onclick="CalcButton(4)">4</button>
   <button onclick="CalcButton(5)">5</button>
   <button onclick="CalcButton(6)">6</button>
+  <button onclick="selectOperation('-')">-</button>
 
   <button onclick="CalcButton(1)">1</button>
   <button onclick="CalcButton(2)">2</button>
   <button onclick="CalcButton(3)">3</button>
-
-  <button onclick="selectOperator('+')">+</button>
-  <button onclick="selectOperator('-')">-</button>
-  <button onclick="selectOperator('*')">*</button>
+  <button onclick="selectOperation('*')">*</button>
+ 
+  <!-- <button onclick="selectOperation('+')">+</button>
+  <button onclick="selectOperation('-')">-</button>
+  <button onclick="selectOperation('*')">*</button>  -->
 
   <button onclick="CalcButton(0)">0</button>
   <button onclick="CalcButton('.')">.</button>
-  <button onclick="CalcButton('=')">=</button>
+  <button onclick="calculate()">=</button>
+  <button onclick="selectOperation('/')">/</button>
 </div>
 
-<div class="input-field" style="height: 60px; width: 60px; border: 2px solid; border-radius: 5px;">
+<div class="input-field" style="height: 60px; width: 60px; border: 2px solid; border-radius: 5px;" placeholder="0">
     <p id="display"></p>
 </div> 
 
 <script>
 
-  const display = document.getElementById("display")
+  const display = document.getElementById('display')
   
-  let operator = null
-  let a = null
-  let b = null
+  let operation = null
+  let a = ''
+  let b = ''
+  let total = 0
 
-  function selectOperator(op) {
-    operator = op
+  function selectOperation(op) {
+    if (operation !== null) {
+      calculate()
+    }
+    operation = op
   }
 
-  function CalcButton(button) {
-    display.innerHTML += button;
+  function CalcButton(value) {
+    // entering first number
+    if (operation === null) {
+      a += value
+      display.innerHTML = a
+    } else {
+      b += value
+      display.innerHTML = b
+    }
+    log(value)
   }
 
   function calculate() {
     let answer 
 
-    if (op === '+') {
-      answer = a + b
-    } else if (op === '-') {
+    const x = parseFloat(a)
+    const y = parseFloat(b)
 
-    } 
+    if (operation === '+') {
+      answer = x + y
+    } else if (operation === '-') {
+      answer = x - y
+    } else if (operation === '*') {
+      answer = x * y
+    } else if (operation === '/') {
+      answer = x / y
+    }
 
-    display.innerHTML = answer
+    a = answer
+    b = ''
+
+    display.innerHTML = a
+    log(answer)
   }
 
+  function log(value) {
+    console.log('a:'+a, 'b:'+b, 'value:'+value, 'operation:'+operation)
+  }
 
 </script>
 
 <!-- <div class="main">
   <form name = "form">
-    <input class="textview" placeholder="3"><br>
+    <input class="textview" placeholder="0"<br>
     <table>
       <tr><input type="button"></tr>
     </table>
@@ -77,42 +106,55 @@
 </div> -->
 
 <script>
-function CalcButton0() {
-  document.getElementById("demo").innerHTML = "0";
-}
-function CalcButton1() {
-  document.getElementById("demo").innerHTML = "1";
-}
-function CalcButton2() {
-  document.getElementById("demo").innerHTML = "2";
-}
-function CalcButton3() {
-  document.getElementById("demo").innerHTML = "3";
-}
-function CalcButton4() {
-  document.getElementById("demo").innerHTML = "4";
-}
-function CalcButton5() {
-  document.getElementById("demo").innerHTML = "5";
-}
-function CalcButton6() {
-  document.getElementById("demo").innerHTML = "6";
-}
-function CalcButton7() {
-  document.getElementById("demo").innerHTML = "7";
-}
-function CalcButton8() {
-  document.getElementById("demo").innerHTML = "8";
-}
-function CalcButton9() {
-  document.getElementById("demo").innerHTML = "9";
-}
-function CalcButtonDecimal() {
-  document.getElementById("demo").innerHTML = '.';
-}
-function CalcButtonEqual() {
-  document.getElementById("demo").innerHTML = '=';
-}
+// function CalcButton0() {
+//   display.innerHTML = "0";
+// }
+// function CalcButton1() {
+//   display.innerHTML = "1";
+// }
+// function CalcButton2() {
+//   display.innerHTML = "2";
+// }
+// function CalcButton3() {
+//   display.innerHTML = "3";
+// }
+// function CalcButton4() {
+//   display.innerHTML = "4";
+// }
+// function CalcButton5() {
+//   display.innerHTML = "5";
+// }
+// function CalcButton6() {
+//   display.innerHTML = "6";
+// }
+// function CalcButton7() {
+//   display.innerHTML = "7";
+// }
+// function CalcButton8() {
+//   display.innerHTML = "8";
+// }
+// function CalcButton9() {
+//   display.innerHTML = "9";
+// }
+// function CalcButtonDecimal() {
+//   display.innerHTML = '.';
+// }
+// function CalcButtonEqual() {
+//   display.innerHTML = '=';
+//   calculate();
+// }
+// function CalcButtonAdd() {
+//   display.innerHTML = '+';
+// }
+// function CalcButtonSubtract() {
+//   display.innerHTML = '-';
+// }
+// function CalcButtonMultiply() {
+//   display.innerHTML = '*';
+// }
+// function CalcButtonDivide() {
+//   display.innerHTML = '/';
+// }
 </script>
 
 </body>
