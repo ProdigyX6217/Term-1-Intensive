@@ -10,58 +10,108 @@
 
 <p>Click the Numeric Values (Buttons) to trigger a function that will output the corresponding number in a p element with id="demo".</p>
 
-<button onclick="myFunction0()">0</button>
-<button onclick="myFunction1()">1</button>
-<button onclick="myFunction2()">2</button>
-<button onclick="myFunction3()">3</button>
-<button onclick="myFunction4()">4</button>
-<button onclick="myFunction5()">5</button>
-<button onclick="myFunction6()">6</button>
-<button onclick="myFunction7()">7</button>
-<button onclick="myFunction8()">8</button>
-<button onclick="myFunction9()">9</button>
+<div class='calc-buttons' style="display: grid; grid-gap: 4px; grid-template-columns: 1fr 1fr 1fr">
+  <button onclick="CalcButton(7)">7</button>
+  <button onclick="CalcButton(8)">8</button>
+  <button onclick="CalcButton(9)">9</button>
 
-<div class="main">
-  <form name = "form">
-    <input class="textview"><br>
-    <table>
-      <tr><input type="button">
-    </table>
-  </form>
+  <button onclick="CalcButton(4)">4</button>
+  <button onclick="CalcButton(5)">5</button>
+  <button onclick="CalcButton(6)">6</button>
+
+  <button onclick="CalcButton(1)">1</button>
+  <button onclick="CalcButton(2)">2</button>
+  <button onclick="CalcButton(3)">3</button>
+
+  <button onclick="selectOperator('+')">+</button>
+  <button onclick="selectOperator('-')">-</button>
+  <button onclick="selectOperator('*')">*</button>
+
+  <button onclick="CalcButton(0)">0</button>
+  <button onclick="CalcButton('.')">.</button>
+  <button onclick="CalcButton('=')">=</button>
 </div>
 
-<p id="demo"></p>
+<div class="input-field" style="height: 60px; width: 60px; border: 2px solid; border-radius: 5px;">
+    <p id="display"></p>
+</div> 
 
 <script>
-function myFunction0() {
+
+  const display = document.getElementById("display")
+  
+  let operator = null
+  let a = null
+  let b = null
+
+  function selectOperator(op) {
+    operator = op
+  }
+
+  function CalcButton(button) {
+    display.innerHTML += button;
+  }
+
+  function calculate() {
+    let answer 
+
+    if (op === '+') {
+      answer = a + b
+    } else if (op === '-') {
+
+    } 
+
+    display.innerHTML = answer
+  }
+
+
+</script>
+
+<!-- <div class="main">
+  <form name = "form">
+    <input class="textview" placeholder="3"><br>
+    <table>
+      <tr><input type="button"></tr>
+    </table>
+  </form>
+</div> -->
+
+<script>
+function CalcButton0() {
   document.getElementById("demo").innerHTML = "0";
 }
-function myFunction1() {
+function CalcButton1() {
   document.getElementById("demo").innerHTML = "1";
 }
-function myFunction2() {
+function CalcButton2() {
   document.getElementById("demo").innerHTML = "2";
 }
-function myFunction3() {
+function CalcButton3() {
   document.getElementById("demo").innerHTML = "3";
 }
-function myFunction4() {
+function CalcButton4() {
   document.getElementById("demo").innerHTML = "4";
 }
-function myFunction5() {
+function CalcButton5() {
   document.getElementById("demo").innerHTML = "5";
 }
-function myFunction6() {
+function CalcButton6() {
   document.getElementById("demo").innerHTML = "6";
 }
-function myFunction7() {
+function CalcButton7() {
   document.getElementById("demo").innerHTML = "7";
 }
-function myFunction8() {
+function CalcButton8() {
   document.getElementById("demo").innerHTML = "8";
 }
-function myFunction9() {
+function CalcButton9() {
   document.getElementById("demo").innerHTML = "9";
+}
+function CalcButtonDecimal() {
+  document.getElementById("demo").innerHTML = '.';
+}
+function CalcButtonEqual() {
+  document.getElementById("demo").innerHTML = '=';
 }
 </script>
 
