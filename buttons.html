@@ -1,3 +1,4 @@
+<!-- Helped by Mitchell Hudson / Andrey Novichkov /  -->
 <!DOCTYPE html>
 <html>
 <body>
@@ -7,7 +8,7 @@
 
 <p>The Onclick Event (Button Press) triggers a function when an element is clicked on.</p>
 
-<p>Click the Numeric Values (Buttons) to trigger a function that will output the corresponding symbol in a p element with id="demo".</p>
+<p>Click the Numeric Values (Buttons) to trigger a function that will output the corresponding symbol in a p element with id="display".</p>
 
 <div class='calc-buttons' style="display: grid; grid-gap: 4px; grid-template-columns: 1fr 1fr 1fr 1fr">
   <button onclick="CalcButton(7)">7</button>
@@ -25,19 +26,15 @@
   <button onclick="CalcButton(3)">3</button>
   <button onclick="selectOperation('*')">*</button>
  
-  <!-- <button onclick="selectOperation('+')">+</button>
-  <button onclick="selectOperation('-')">-</button>
-  <button onclick="selectOperation('*')">*</button>  -->
-
   <button onclick="CalcButton(0)">0</button>
   <button onclick="CalcButton('.')">.</button>
   <button onclick="calculate()">=</button>
   <button onclick="selectOperation('/')">/</button>
 </div>
-
+<!--
 <div class="input-field" style="height: 60px; width: 60px; border: 2px solid; border-radius: 5px;" placeholder="0">
     <p id="display"></p>
-</div> 
+</div> /-->
 
 <script>
 
@@ -55,17 +52,37 @@
     operation = op
   }
 
-  function CalcButton(value) {
-    // entering first number
-    if (operation === null) {
-      a += value
-      display.innerHTML = a
-    } else {
-      b += value
-      display.innerHTML = b
+  function decimalCounter(value) {
+    counter = 0 
+    for (i=0; i < value.length; i ++) {
+      if (value.charAt(i) == ".") {
+        counter = counter + 1
+      }
     }
-    log(value)
+    return counter 
   }
+
+  function CalcButton(value) {
+    // entering first number MITCHELL
+    // check if value has more than one decimal point
+    // if yes, return "NaN" or error message, if no, continue
+
+    decimalCount = decimalCounter(a)
+    if (decimalCount < 1) {
+        if (operation === null) {
+        a += value
+        document.getElementById('display').value = a
+      } else {
+        b += value
+        display.innerHTML = b
+      }
+      log(value)
+    } 
+
+  }
+    // else (decimalCount >= 1) {
+    //   return "NaN"
+    // }
 
   function calculate() {
     let answer 
@@ -96,14 +113,14 @@
 
 </script>
 
-<!-- <div class="main">
+ <div class="main">
   <form name = "form">
-    <input class="textview" placeholder="0"<br>
+    <input class="textview" id="display" placeholder="0" value="2">
     <table>
       <tr><input type="button"></tr>
     </table>
   </form>
-</div> -->
+</div> 
 
 <script>
 // function CalcButton0() {
